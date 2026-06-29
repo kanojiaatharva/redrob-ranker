@@ -1,0 +1,31 @@
+team:
+  name: RedrobRankers
+  organization: Independent
+
+project:
+  name: redrob-ranker
+  version: 1.0.0
+
+language: Java
+
+runtime:
+  java: 17
+
+build:
+  tool: Maven
+
+entrypoint:
+  class: com.ak.redrob.App
+
+output:
+  format: CSV
+  top_k: 100
+
+constraints:
+  runtime: "<5 minutes"
+  memory: "16 GB"
+  internet: false
+
+notes: |
+  Placeholder metadata.
+  Update with challenge-specific information before submission.
