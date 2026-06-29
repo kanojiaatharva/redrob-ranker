@@ -1,9 +1,6 @@
 package com.ak.redrob.exception;
 
-/**
- * Custom checked exception thrown when errors occur during candidate loading, scoring, or ranking.
- */
-public class RankingException extends Exception {
+public class RankingException extends RuntimeException {
 
     public RankingException(String message) {
         super(message);
