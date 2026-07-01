@@ -1,36 +1,46 @@
 package com.ak.redrob.model;
 
-/**
- * Represents the normalized institution tier.
- *
- * <p>This can be used by the scoring engine to provide
- * additional weight to institutions if required.</p>
- */
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
+import java.util.Locale;
+
 public enum EducationTier {
 
-    /**
-     * Top-tier institutions.
-     */
     TIER_1,
-
-    /**
-     * Upper-mid tier institutions.
-     */
     TIER_2,
-
-    /**
-     * Mid-tier institutions.
-     */
     TIER_3,
-
-    /**
-     * Other recognized institutions.
-     */
     TIER_4,
+    UNKNOWN;
 
-    /**
-     * Institution tier could not be determined.
-     */
-    UNKNOWN
+    @JsonCreator
+    public static EducationTier fromValue(String value) {
+
+        if (value == null) {
+            return UNKNOWN;
+        }
+
+        return switch (value.trim().toUpperCase(Locale.ROOT)) {
+
+            case "TIER_1" -> TIER_1;
+
+            case "TIER_2" -> TIER_2;
+
+            case "TIER_3" -> TIER_3;
+
+            case "TIER_4" -> TIER_4;
+
+            default -> UNKNOWN;
+
+        };
+
+    }
+
+    @JsonValue
+    public String toValue() {
+
+        return name().toLowerCase(Locale.ROOT);
+
+    }
 
 }

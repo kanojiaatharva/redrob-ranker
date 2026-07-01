@@ -1,0 +1,6 @@
+Senior AI Engineer
+
+Python
+RAG
+Embeddings
+Vector Search

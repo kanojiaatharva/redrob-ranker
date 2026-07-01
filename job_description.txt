@@ -1,0 +1,20 @@
+Senior AI Engineer
+
+Required Skills
+
+Python
+RAG
+Embeddings
+Vector Search
+FAISS
+Pinecone
+NLP
+Ranking
+
+Experience
+
+5-9 years
+
+Location
+
+India

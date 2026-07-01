@@ -120,6 +120,16 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+
+            <groupId>org.apache.poi</groupId>
+
+            <artifactId>poi-ooxml</artifactId>
+
+            <version>5.4.1</version>
+
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -128,30 +138,22 @@
 
         <plugins>
 
-            <!-- Compiler -->
-
+            <!-- Java Compiler -->
             <plugin>
-
                 <groupId>org.apache.maven.plugins</groupId>
-
                 <artifactId>maven-compiler-plugin</artifactId>
-
                 <version>3.13.0</version>
 
                 <configuration>
 
-                    <release>${java.version}</release>
+                    <release>17</release>
 
                     <annotationProcessorPaths>
 
                         <path>
-
                             <groupId>org.projectlombok</groupId>
-
                             <artifactId>lombok</artifactId>
-
                             <version>${lombok.version}</version>
-
                         </path>
 
                     </annotationProcessorPaths>
@@ -174,50 +176,64 @@
 
                     <useModulePath>false</useModulePath>
 
+                    <includes>
+
+                        <include>**/*Test.java</include>
+
+                    </includes>
+
                 </configuration>
 
             </plugin>
 
-            <!-- Java Version Enforcement -->
+            <!-- Integration Tests -->
 
             <plugin>
 
                 <groupId>org.apache.maven.plugins</groupId>
 
-                <artifactId>maven-enforcer-plugin</artifactId>
+                <artifactId>maven-failsafe-plugin</artifactId>
 
-                <version>3.5.0</version>
+                <version>3.5.2</version>
 
                 <executions>
 
                     <execution>
 
-                        <id>enforce-java</id>
-
                         <goals>
 
-                            <goal>enforce</goal>
+                            <goal>integration-test</goal>
+
+                            <goal>verify</goal>
 
                         </goals>
-
-                        <configuration>
-
-                            <rules>
-
-                                <requireJavaVersion>
-
-                                    <version>[17,)</version>
-
-                                </requireJavaVersion>
-
-                            </rules>
-
-                        </configuration>
 
                     </execution>
 
                 </executions>
 
+                <configuration>
+
+                    <includes>
+
+                        <include>**/*IT.java</include>
+
+                    </includes>
+
+                </configuration>
+
+            </plugin>
+
+            <!-- JaCoCo -->
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.12</version>
+
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
             </plugin>
 
             <!-- Fat Jar -->
@@ -266,9 +282,9 @@
 
                                         <exclude>META-INF/*.SF</exclude>
 
-                                        <exclude>META-INF/*.DSA</exclude>
-
                                         <exclude>META-INF/*.RSA</exclude>
+
+                                        <exclude>META-INF/*.DSA</exclude>
 
                                     </excludes>
 

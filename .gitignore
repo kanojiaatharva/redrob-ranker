@@ -48,11 +48,13 @@ Thumbs.db
 *.tmp
 
 ############################
-# Local Data
+# Local Data # Datasets
 ############################
 
 data/
 output/
+candidates.jsonl
+*.jsonl
 
 ############################
 # Java
@@ -65,3 +67,5 @@ output/
 ############################
 
 coverage/
+
+

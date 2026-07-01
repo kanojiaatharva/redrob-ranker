@@ -42,6 +42,19 @@ java -jar cli/target/redrob-ranker.jar \
 
 🚧 Under active development.
 
+## Dataset
+
+The candidate dataset is not included in this repository due to its size.
+
+Place the following files in the project root:
+
+- candidates.jsonl
+- job_description.docx
+
+Then run:
+
+java -jar target/redrob-ranker.jar --candidates candidates.jsonl --jd job_description.docx --out submission.csv
+
 ## License
 
 MIT
