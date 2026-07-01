@@ -5,6 +5,7 @@ public enum ScoreComponent {
     SKILLS,
     EXPERIENCE,
     EDUCATION,
+    KEYWORDS,
     BEHAVIORAL,
     SEMANTIC,
     BONUS

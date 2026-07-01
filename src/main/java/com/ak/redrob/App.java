@@ -4,47 +4,72 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.File;
-import java.util.concurrent.Callable;
 
-@Command(name = "redrob-ranker", mixinStandardHelpOptions = true, version = "1.0.0",
-        description = "High-performance candidate ranking engine for Redrob AI Hiring Challenge.")
-public class App implements Callable<Integer> {
+@Command(
+        name = "redrob-ranker",
+        mixinStandardHelpOptions = true,
+        version = "1.0.0",
+        description = "AI Candidate Ranking Engine"
+)
+public class App implements Runnable {
 
-    private static final Logger logger = LoggerFactory.getLogger(App.class);
+    @Option(
+            names = "--candidates",
+            required = true,
+            description = "Path to candidates JSONL"
+    )
+    private File candidates;
 
-    @Option(names = {"-c", "--candidates"}, description = "Path to candidates JSONL file.", required = true)
-    private File candidatesFile;
+    @Option(
+            names = "--jd",
+            required = true,
+            description = "Path to job description"
+    )
+    private File jobDescription;
 
-    @Option(names = {"-j", "--jd"}, description = "Path to job description text/docx file.", required = true)
-    private File jdFile;
-
-    @Option(names = {"-o", "--out"}, description = "Path to output rankings CSV file.", required = true)
-    private File outputFile;
-
-    public static void main(String[] args) {
-        int exitCode = new CommandLine(new App()).execute(args);
-        System.exit(exitCode);
-    }
+    @Option(
+            names = "--out",
+            required = true,
+            description = "Output CSV"
+    )
+    private File output;
 
     @Override
-    public Integer call() throws Exception {
-        logger.info("Starting Redrob Candidate Ranker Engine...");
-        logger.info("Candidates File: {}", candidatesFile.getAbsolutePath());
-        logger.info("Job Description File: {}", jdFile.getAbsolutePath());
-        logger.info("Output CSV File: {}", outputFile.getAbsolutePath());
+    public void run() {
 
-        System.out.println("--------------------------------------------------");
-        System.out.println("Redrob Candidate Ranker initialized successfully!");
-        System.out.println("Candidates: " + candidatesFile.getName());
-        System.out.println("Job Description: " + jdFile.getName());
-        System.out.println("Output: " + outputFile.getName());
-        System.out.println("--------------------------------------------------");
+        System.out.println("Candidates : " + candidates);
 
-        logger.info("Candidate ranking task finished successfully.");
-        return 0;
+        System.out.println("Job : " + jobDescription);
+
+        System.out.println("Output : " + output);
+
+        /*
+         * Later:
+         *
+         * JobDescription jd =
+         *      JobDescriptionLoader.load(jobDescription.toPath());
+         *
+         * RankingPipeline pipeline =
+         *      new RankingPipeline();
+         *
+         * pipeline.execute(
+         *      candidates.toPath(),
+         *      jd,
+         *      output.toPath()
+         * );
+         */
+
     }
+
+    public static void main(String[] args) {
+
+        int exitCode =
+                new CommandLine(new App())
+                        .execute(args);
+
+        System.exit(exitCode);
+
+    }
+
 }
