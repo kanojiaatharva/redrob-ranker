@@ -8,11 +8,14 @@ public class KeywordScorer {
     public double score(Candidate candidate,
                         JobDescription job) {
 
-        String resume =
-                candidate.resumeText().toLowerCase();
+        String resume = String.join(" ",
+                candidate.profile().headline(),
+                candidate.profile().summary()
+        ).toLowerCase();
 
-        String jd =
-                job.description().toLowerCase();
+        String jd = String.join(" ",
+                job.requiredSkills()
+        ).toLowerCase();
 
         int matches = 0;
 

@@ -8,12 +8,12 @@ public class ExperienceScorer {
     public double score(Candidate candidate,
                         JobDescription job) {
 
-        if (job.minimumExperience() <= 0)
+        if (job.requiredYearsMin() <= 0)
             return 1.0;
 
         return Math.min(
-                candidate.totalExperienceYears()
-                        / job.minimumExperience(),
+                candidate.profile().yearsOfExperience()
+                        / job.requiredYearsMin(),
                 1.0
         );
 

@@ -9,7 +9,7 @@ public class ExperienceExtractor implements FeatureExtractor {
     public double extract(Candidate candidate,
                           JobDescription jobDescription) {
 
-        return candidate.totalExperienceYears();
+        return candidate.profile().yearsOfExperience();
 
     }
 
